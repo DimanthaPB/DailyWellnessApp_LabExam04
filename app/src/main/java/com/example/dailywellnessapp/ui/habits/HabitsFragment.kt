@@ -9,13 +9,7 @@ import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.view.View
 import android.view.animation.DecelerateInterpolator
-import android.widget.ArrayAdapter
-import android.widget.Button
-import android.widget.EditText
-import android.widget.LinearLayout
-import android.widget.ProgressBar
-import android.widget.Spinner
-import android.widget.TextView
+import android.widget.*
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.DividerItemDecoration
@@ -36,6 +30,8 @@ class HabitsFragment : Fragment(R.layout.fragment_habits) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         prefs = SharedPrefsManager(requireContext())
+
+        habits.clear()
         habits.addAll(prefs.loadHabits())
         updateCompletionText()
 
@@ -73,6 +69,7 @@ class HabitsFragment : Fragment(R.layout.fragment_habits) {
                     prefs.saveHabits(habits)
                     adapter.notifyItemRemoved(position)
                     updateCompletionText()
+                    updateEmptyMessage()
                 } else {
                     showEditHabitDialog(habit, position)
                 }
@@ -94,8 +91,7 @@ class HabitsFragment : Fragment(R.layout.fragment_habits) {
 
                 val icon: Drawable?
                 if (dX > 0) {
-                    // Right swipe (Edit)
-                    paint.color = Color.parseColor("#4CAF50") // Green
+                    paint.color = Color.parseColor("#4CAF50")
                     canvas.drawRect(itemView.left.toFloat(), itemView.top.toFloat(), itemView.left + dX, itemView.bottom.toFloat(), paint)
                     icon = ContextCompat.getDrawable(requireContext(), R.drawable.ic_edit)
                     icon?.setBounds(
@@ -105,8 +101,7 @@ class HabitsFragment : Fragment(R.layout.fragment_habits) {
                         itemView.bottom - (itemView.height - iconSize) / 2
                     )
                 } else {
-                    // Left swipe (Delete)
-                    paint.color = Color.parseColor("#F44336") // Red
+                    paint.color = Color.parseColor("#F44336")
                     canvas.drawRect(itemView.right + dX, itemView.top.toFloat(), itemView.right.toFloat(), itemView.bottom.toFloat(), paint)
                     icon = ContextCompat.getDrawable(requireContext(), R.drawable.ic_delete)
                     icon?.setBounds(
@@ -123,8 +118,7 @@ class HabitsFragment : Fragment(R.layout.fragment_habits) {
         })
         itemTouchHelper.attachToRecyclerView(recyclerView)
 
-
-
+        updateEmptyMessage()
     }
 
     private fun showEditHabitDialog(habit: Habit, position: Int) {
@@ -155,6 +149,7 @@ class HabitsFragment : Fragment(R.layout.fragment_habits) {
                 adapter.notifyItemChanged(position)
                 updateCompletionText()
                 dialog.dismiss()
+                updateEmptyMessage()
             } else {
                 nameInput.error = "Please enter a habit name"
             }
@@ -162,13 +157,6 @@ class HabitsFragment : Fragment(R.layout.fragment_habits) {
 
         dialog.window?.setBackgroundDrawableResource(android.R.color.transparent)
         dialog.show()
-        updateEmptyMessage()
-
-    }
-
-    private fun updateEmptyMessage() {
-        val emptyMessage = view?.findViewById<TextView>(R.id.emptyMessage)
-        emptyMessage?.visibility = if (habits.isEmpty()) View.VISIBLE else View.GONE
     }
 
     private fun showAddHabitDialog() {
@@ -186,7 +174,7 @@ class HabitsFragment : Fragment(R.layout.fragment_habits) {
         confirmButton.setOnClickListener {
             val name = nameInput.text.toString()
             val category = spinner.selectedItem.toString()
-            habits.sortBy { it.category }
+
             if (name.isNotBlank()) {
                 val newHabit = Habit(id = habits.size + 1, name = name, category = category)
                 habits.add(newHabit)
@@ -194,6 +182,7 @@ class HabitsFragment : Fragment(R.layout.fragment_habits) {
                 adapter.notifyItemInserted(habits.size - 1)
                 updateCompletionText()
                 dialog.dismiss()
+                updateEmptyMessage()
             } else {
                 nameInput.error = "Please enter a habit name"
             }
@@ -201,9 +190,6 @@ class HabitsFragment : Fragment(R.layout.fragment_habits) {
 
         dialog.window?.setBackgroundDrawableResource(android.R.color.transparent)
         dialog.show()
-        adapter.notifyDataSetChanged()
-        updateEmptyMessage()
-
     }
 
     private fun updateCompletionText() {
@@ -223,4 +209,8 @@ class HabitsFragment : Fragment(R.layout.fragment_habits) {
         percentText?.text = "$percent%"
     }
 
+    private fun updateEmptyMessage() {
+        val emptyMessage = view?.findViewById<TextView>(R.id.emptyMessage)
+        emptyMessage?.visibility = if (habits.isEmpty()) View.VISIBLE else View.GONE
+    }
 }
