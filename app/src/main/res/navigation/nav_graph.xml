@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/habitsFragment">
+
+    <fragment android:id="@+id/habitsFragment" android:name="com.example.dailywellnessapp.ui.habits.HabitsFragment" />
+    <fragment android:id="@+id/moodJournalFragment" android:name="com.example.dailywellnessapp.ui.mood.MoodJournalFragment" />
+    <fragment android:id="@+id/settingsFragment" android:name="com.example.dailywellnessapp.ui.settings.SettingsFragment" />
+</navigation>
