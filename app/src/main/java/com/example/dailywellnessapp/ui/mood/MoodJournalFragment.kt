@@ -9,11 +9,14 @@ import android.hardware.SensorEventListener
 import android.hardware.SensorManager
 import android.os.Bundle
 import android.view.View
+import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.CalendarView
+import android.widget.Spinner
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.dailywellnessapp.R
@@ -86,6 +89,24 @@ class MoodJournalFragment : Fragment(R.layout.fragment_mood_journal) {
         accelerometer?.let {
             sensorManager.registerListener(shakeListener, it, SensorManager.SENSOR_DELAY_UI)
         }
+
+        val itemTouchHelper = ItemTouchHelper(object : ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT or ItemTouchHelper.RIGHT) {
+            override fun onMove(rv: RecyclerView, vh: RecyclerView.ViewHolder, target: RecyclerView.ViewHolder): Boolean = false
+
+            override fun onSwiped(vh: RecyclerView.ViewHolder, direction: Int) {
+                val position = vh.adapterPosition
+                val entry = moodEntries[position]
+
+                if (direction == ItemTouchHelper.LEFT) {
+                    moodEntries.removeAt(position)
+                    prefs.saveMoodEntries(moodEntries)
+                    adapter.notifyItemRemoved(position)
+                } else {
+                    showEditMoodDialog(entry, position)
+                }
+            }
+        })
+        itemTouchHelper.attachToRecyclerView(recyclerView)
     }
 
     private val shakeListener = object : SensorEventListener {
@@ -128,6 +149,32 @@ class MoodJournalFragment : Fragment(R.layout.fragment_mood_journal) {
                 adapter.notifyItemInserted(0)
             }
             .show()
+    }
+
+    private fun showEditMoodDialog(entry: MoodEntry, position: Int) {
+        val dialogView = layoutInflater.inflate(R.layout.dialog_edit_mood, null)
+        val moodSpinner = dialogView.findViewById<Spinner>(R.id.moodSpinner)
+        val confirmButton = dialogView.findViewById<Button>(R.id.btnConfirmEdit)
+
+        val moods = listOf("😊", "😔", "😡", "😢", "😴", "😎", "🤯", "❤️")
+        val adapterSpinner = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_dropdown_item, moods)
+        moodSpinner.adapter = adapterSpinner
+        moodSpinner.setSelection(moods.indexOf(entry.emoji))
+
+        val dialog = AlertDialog.Builder(requireContext())
+            .setView(dialogView)
+            .create()
+
+        confirmButton.setOnClickListener {
+            val newMood = moodSpinner.selectedItem.toString()
+            entry.emoji = newMood
+            prefs.saveMoodEntries(moodEntries)
+            adapter.notifyItemChanged(position)
+            dialog.dismiss()
+        }
+
+        dialog.window?.setBackgroundDrawableResource(android.R.color.transparent)
+        dialog.show()
     }
 
     override fun onDestroyView() {

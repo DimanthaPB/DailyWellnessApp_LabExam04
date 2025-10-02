@@ -39,11 +39,20 @@ class SharedPrefsManager(context: Context) {
         }
     }
 
+    fun isHydrationReminderEnabled(): Boolean {
+        return prefs.getBoolean("hydration_enabled", true)
+    }
+
+    fun setHydrationReminderEnabled(enabled: Boolean) {
+        prefs.edit().putBoolean("hydration_enabled", enabled).apply()
+    }
+
+    fun getHydrationInterval(): Int {
+        return prefs.getInt("hydration_interval", 2)
+    }
+
     fun saveHydrationInterval(hours: Int) {
         prefs.edit().putInt("hydration_interval", hours).apply()
     }
 
-    fun getHydrationInterval(): Int {
-        return prefs.getInt("hydration_interval", 2) // default 2 hours
-    }
 }
