@@ -1,6 +1,6 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
-    android:background="#FAFAFA"
+    android:background="@color/primary"
     android:padding="24dp"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -12,7 +12,7 @@
         android:text="Edit Mood Entry"
         android:textSize="20sp"
         android:textStyle="bold"
-        android:textColor="#8D6E63"
+        android:textColor="@color/secondary"
         android:layout_marginBottom="16dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
@@ -28,8 +28,8 @@
     <Button
         android:id="@+id/btnConfirmEdit"
         android:text="Save Changes"
-        android:textColor="#FFFFFF"
-        android:backgroundTint="#8D6E63"
+        android:textColor="@color/primary"
+        android:backgroundTint="@color/accent"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 </LinearLayout>

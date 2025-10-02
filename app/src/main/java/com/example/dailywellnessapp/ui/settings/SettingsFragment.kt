@@ -42,6 +42,16 @@ class EmojiAxisFormatter : ValueFormatter() {
     }
 }
 
+class MoodEmojiXAxisFormatter(private val emojis: List<String>) : ValueFormatter() {
+    override fun getFormattedValue(value: Float): String {
+        val index = value.toInt()
+        if (index >= 0 && index < emojis.size) {
+            return emojis[index]
+        }
+        return ""
+    }
+}
+
 class SettingsFragment : Fragment(R.layout.fragment_settings) {
     private lateinit var prefs: SharedPrefsManager
 
@@ -123,9 +133,11 @@ class SettingsFragment : Fragment(R.layout.fragment_settings) {
         val now = System.currentTimeMillis()
         val sevenDaysAgo = now - 7 * 24 * 60 * 60 * 1000L
 
-        val entries = moodEntries
+        val recentMoods = moodEntries
             .filter { it.timestamp in sevenDaysAgo..now }
             .sortedBy { it.timestamp }
+
+        val entries = recentMoods
             .mapIndexed { index, mood ->
                 val score = emojiMap[mood.emoji] ?: 0
                 Entry(index.toFloat(), score.toFloat())
@@ -145,10 +157,18 @@ class SettingsFragment : Fragment(R.layout.fragment_settings) {
         chart.data = LineData(dataSet)
         chart.description.isEnabled = false
         chart.axisRight.isEnabled = false
-        chart.axisLeft.valueFormatter = EmojiAxisFormatter()
+
         chart.axisLeft.granularity = 1f
         chart.axisLeft.setLabelCount(emojiMap.size, true)
-        chart.xAxis.position = XAxis.XAxisPosition.BOTTOM
+
+        val xAxis = chart.xAxis
+        xAxis.position = XAxis.XAxisPosition.BOTTOM
+        val emojiLabels = recentMoods.map { it.emoji }
+        xAxis.valueFormatter = MoodEmojiXAxisFormatter(emojiLabels)
+        xAxis.granularity = 1f
+        xAxis.setLabelCount(emojiLabels.size, true)
+
+
         chart.animateY(800)
         chart.invalidate()
     }

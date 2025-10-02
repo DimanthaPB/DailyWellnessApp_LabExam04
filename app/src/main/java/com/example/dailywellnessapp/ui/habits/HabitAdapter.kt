@@ -28,13 +28,17 @@ class HabitAdapter(
     override fun onBindViewHolder(holder: HabitViewHolder, position: Int) {
         val habit = habits[position]
 
+        holder.checkBox.setOnCheckedChangeListener(null)
         holder.checkBox.text = habit.name
         holder.checkBox.isChecked = habit.isCompleted
         holder.categoryLabel.text = "Category: ${habit.category}"
 
         holder.checkBox.setOnCheckedChangeListener { _, isChecked ->
-            habit.isCompleted = isChecked
-            onToggle(habit)
+            if (holder.adapterPosition != RecyclerView.NO_POSITION) {
+                val currentHabit = habits[holder.adapterPosition]
+                currentHabit.isCompleted = isChecked
+                onToggle(currentHabit)
+            }
         }
     }
 
