@@ -1,75 +1,76 @@
 <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="#F5F5F5"
+    android:background="@color/primary"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <!-- Floating Action Button -->
     <LinearLayout
-        android:orientation="vertical"
-        android:paddingTop="20dp"
-        android:paddingLeft="20dp"
-        android:paddingRight="20dp"
-        android:paddingBottom="100dp"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:paddingLeft="20dp"
+        android:paddingTop="20dp"
+        android:paddingRight="20dp"
+        android:paddingBottom="100dp">
 
         <!-- Header -->
         <TextView
             android:id="@+id/pageTitle"
-            android:text="My Habits"
-            android:textSize="34sp"
-            android:textStyle="bold"
-            android:textColor="#8D6E63"
-            android:layout_marginBottom="8dp"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:text="My Habits"
+            android:textColor="@color/secondary"
+            android:textSize="34sp"
+            android:textStyle="bold" />
 
         <!-- Progress Section -->
         <LinearLayout
             android:id="@+id/progressContainer"
-            android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="12dp"
             android:background="@drawable/bg_card"
-            android:padding="12dp"
-            android:layout_marginBottom="12dp">
+            android:orientation="vertical"
+            android:padding="12dp">
 
             <TextView
                 android:id="@+id/progressLabel"
-                android:text="Daily Completion"
-                android:textSize="16sp"
-                android:textColor="#8D6E63"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:text="Daily Completion"
+                android:textColor="@color/secondary"
+                android:textSize="16sp" />
 
             <ProgressBar
                 android:id="@+id/progressBar"
                 style="?android:attr/progressBarStyleHorizontal"
                 android:layout_width="match_parent"
                 android:layout_height="16dp"
+                android:layout_marginTop="4dp"
                 android:max="100"
-                android:progressDrawable="@drawable/progress_glass"
-                android:layout_marginTop="4dp" />
+                android:progressDrawable="@drawable/progress_glass" />
 
             <TextView
                 android:id="@+id/progressPercent"
-                android:text="0%"
-                android:textSize="14sp"
-                android:textColor="#FFAB91"
-                android:layout_marginTop="4dp"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:text="0%"
+                android:textColor="@color/accent"
+                android:textSize="14sp" />
         </LinearLayout>
 
         <TextView
             android:id="@+id/emptyMessage"
-            android:text="No habits yet. Tap + to add one!"
-            android:textSize="16sp"
-            android:textColor="#8D6E63"
-            android:gravity="center"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="32dp"
+            android:gravity="center"
+            android:text="No habits yet. Tap + to add one!"
+            android:textColor="@color/secondary"
+            android:textSize="16sp"
             android:visibility="gone" />
 
         <!-- Habit List -->
@@ -82,19 +83,17 @@
             android:clipToPadding="false"
             android:paddingBottom="80dp" />
 
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/fabAddHabit"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom|end"
-            android:layout_margin="16dp"
-            android:layout_marginBottom="128dp"
-            android:backgroundTint="#FFAB91"
-            android:contentDescription="Add Habit"
-            android:fitsSystemWindows="true"
-            android:src="@drawable/ic_add"
-            android:tint="#FFFFFF" />
     </LinearLayout>
 
-    <!-- Floating Action Button -->
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fabAddHabit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="80dp"
+        android:backgroundTint="@color/accent"
+        android:contentDescription="Add Habit"
+        android:src="@drawable/ic_add"
+        app:tint="@color/primary" />
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

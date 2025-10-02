@@ -1,6 +1,6 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
-    android:background="#FAFAFA"
+    android:background="@color/primary"
     android:padding="24dp"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -14,7 +14,7 @@
         android:text="Add New Habit"
         android:textSize="20sp"
         android:textStyle="bold"
-        android:textColor="#8D6E63"
+        android:textColor="@color/secondary"
         android:layout_marginBottom="16dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
@@ -24,7 +24,8 @@
         android:hint="Habit name"
         android:background="@drawable/bg_input"
         android:padding="12dp"
-        android:textColor="#000000"
+        android:textColor="@color/secondary"
+        android:textColorHint="@color/secondary"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
@@ -39,8 +40,8 @@
     <Button
         android:id="@+id/btnConfirmAdd"
         android:text="Add Habit"
-        android:textColor="#FFFFFF"
-        android:backgroundTint="#8D6E63"
+        android:textColor="@color/primary"
+        android:backgroundTint="@color/accent"
         android:layout_marginTop="20dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
