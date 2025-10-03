@@ -20,7 +20,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
-            android:text="My Habits"
+            android:text="@string/my_habits"
             android:textColor="@color/secondary"
             android:textSize="34sp"
             android:textStyle="bold" />
@@ -39,7 +39,7 @@
                 android:id="@+id/progressLabel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Daily Completion"
+                android:text="@string/daily_completion"
                 android:textColor="@color/secondary"
                 android:textSize="16sp" />
 
@@ -68,7 +68,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="32dp"
             android:gravity="center"
-            android:text="No habits yet. Tap + to add one!"
+            android:text="@string/no_habits_yet"
             android:textColor="@color/secondary"
             android:textSize="16sp"
             android:visibility="gone" />
@@ -93,7 +93,7 @@
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="80dp"
         android:backgroundTint="@color/accent"
-        android:contentDescription="Add Habit"
+        android:contentDescription="@string/add_habit_content_description"
         android:src="@drawable/ic_add"
         app:tint="@color/primary" />
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

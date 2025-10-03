@@ -11,7 +11,7 @@
 
     <TextView
         android:id="@+id/dialogTitle"
-        android:text="Edit Habit"
+        android:text="@string/edit_habit"
         android:textSize="20sp"
         android:textStyle="bold"
         android:textColor="@color/secondary"
@@ -21,7 +21,7 @@
 
     <EditText
         android:id="@+id/inputHabitName"
-        android:hint="Habit name"
+        android:hint="@string/habit_name_hint"
         android:background="@drawable/bg_input"
         android:padding="12dp"
         android:textColor="@color/secondary"
@@ -39,7 +39,7 @@
 
     <Button
         android:id="@+id/btnConfirmEdit"
-        android:text="Save Changes"
+        android:text="@string/save_changes"
         android:textColor="@color/primary"
         android:backgroundTint="@color/accent"
         android:layout_marginTop="20dp"

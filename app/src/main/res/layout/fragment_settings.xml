@@ -13,7 +13,7 @@
 
         <TextView
             android:id="@+id/pageTitle"
-            android:text="Settings"
+            android:text="@string/settings"
             android:textSize="34sp"
             android:textStyle="bold"
             android:textColor="@color/secondary"
@@ -22,7 +22,7 @@
             android:layout_height="wrap_content" />
 
         <TextView
-            android:text="Hydration Reminder Interval"
+            android:text="@string/hydration_reminder_interval"
             android:textSize="18sp"
             android:textColor="@color/secondary"
             android:layout_marginBottom="8dp"
@@ -31,7 +31,7 @@
 
         <Switch
             android:id="@+id/switchEnableReminder"
-            android:text="Enable Hydration Reminders"
+            android:text="@string/enable_hydration_reminders"
             android:textSize="16sp"
             android:textColor="@color/secondary"
             android:layout_width="match_parent"
@@ -47,7 +47,7 @@
 
         <Button
             android:id="@+id/btnSetReminder"
-            android:text="Set Reminder"
+            android:text="@string/set_reminder"
             android:layout_marginTop="16dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -57,7 +57,7 @@
 
         <TextView
             android:id="@+id/pageTitle2"
-            android:text="Mood Trend Overview"
+            android:text="@string/mood_trend_overview"
             android:textSize="34sp"
             android:textStyle="bold"
             android:textColor="@color/secondary"
@@ -74,7 +74,7 @@
 
         <Button
             android:id="@+id/btnExportChart"
-            android:text="Export Mood Chart"
+            android:text="@string/export_mood_chart"
             android:layout_marginTop="16dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

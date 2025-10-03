@@ -9,7 +9,7 @@
 
     <TextView
         android:id="@+id/dialogTitle"
-        android:text="Edit Mood Entry"
+        android:text="@string/edit_mood_entry"
         android:textSize="20sp"
         android:textStyle="bold"
         android:textColor="@color/secondary"
@@ -27,7 +27,7 @@
 
     <Button
         android:id="@+id/btnConfirmEdit"
-        android:text="Save Changes"
+        android:text="@string/save_changes"
         android:textColor="@color/primary"
         android:backgroundTint="@color/accent"
         android:layout_width="match_parent"

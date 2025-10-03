@@ -19,10 +19,10 @@
 
         <TextView
             android:id="@+id/pageTitle"
-            android:text="Mood Journal"
+            android:text="@string/mood_journal"
             android:textSize="34sp"
             android:textStyle="bold"
-            android:textColor="#8D6E63"
+            android:textColor="@color/secondary"
             android:layout_marginBottom="8dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
@@ -35,7 +35,7 @@
 
         <Button
             android:id="@+id/btnLogMood"
-            android:text="Log Mood"
+            android:text="@string/log_mood"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textColor="@color/primary"
@@ -49,7 +49,7 @@
 
         <Button
             android:id="@+id/btnShareMood"
-            android:text="Share Mood Summary"
+            android:text="@string/share_mood_summary"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
